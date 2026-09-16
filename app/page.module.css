@@ -13,7 +13,7 @@
   min-height: 100svh;
   width: min(100%, 660px);
   margin-inline: auto;
-  padding: 9rem clamp(1rem, 5vw, 2rem) 1.25rem;
+  padding: 6rem clamp(1rem, 3vw, 2rem) 1.25rem;
   flex-direction: column;
   justify-content: flex-start;
 }
@@ -84,7 +84,7 @@
 
 .subtitle {
   max-width: 31rem;
-  margin: 0.75rem auto 3rem;
+  margin: 0.45rem auto 1rem;
   color: var(--color-text-muted);
   font-size: 0.82rem;
   line-height: 1.55;
@@ -97,9 +97,10 @@
   left: clamp(1rem, 5vw, 2rem);
   color: #ededed;
   font-size: clamp(0.54rem, 2vw, 0.63rem);
-  letter-spacing: clamp(0.13rem, 1.1vw, 0.47rem);
-  line-height: 3.6;
+  letter-spacing: clamp(0.08rem, 0.5vw, 0.2rem);
+  line-height: 1.5;
   text-align: center;
+  white-space: nowrap;
 }
 
 @media (max-width: 420px) {
