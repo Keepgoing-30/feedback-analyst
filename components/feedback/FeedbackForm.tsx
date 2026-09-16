@@ -1,4 +1,9 @@
-import { useRef, useState, type FormEvent } from "react";
+import {
+  useRef,
+  useState,
+  type FormEvent,
+  type KeyboardEvent,
+} from "react";
 import type { ApiError, SentimentResponse } from "@/types/sentiment";
 import {
   MAX_FEEDBACK_LENGTH,
@@ -116,6 +121,15 @@ export function FeedbackForm({ onResultChange }: FeedbackFormProps) {
     }
   }
 
+  function handleFeedbackKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key !== "Enter" || event.shiftKey || event.nativeEvent.isComposing) {
+      return;
+    }
+
+    event.preventDefault();
+    event.currentTarget.form?.requestSubmit();
+  }
+
   return (
     <form
       className={styles.form}
@@ -142,6 +156,7 @@ export function FeedbackForm({ onResultChange }: FeedbackFormProps) {
         name="feedback"
         value={feedback}
         onChange={(event) => setFeedback(event.target.value)}
+        onKeyDown={handleFeedbackKeyDown}
         placeholder="Example: The product is excellent and delivery was fast."
         rows={6}
         maxLength={MAX_FEEDBACK_LENGTH}

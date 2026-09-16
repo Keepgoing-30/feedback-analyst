@@ -1,4 +1,4 @@
-export const MAX_FEEDBACK_LENGTH = 1_000;
+export const MAX_FEEDBACK_LENGTH = 3_000;
 
 export type FeedbackValidationResult =
   | { success: true; feedback: string }

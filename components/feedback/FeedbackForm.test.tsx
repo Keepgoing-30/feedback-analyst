@@ -8,6 +8,7 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MAX_FEEDBACK_LENGTH } from "@/lib/validation";
 import { FeedbackForm } from "./FeedbackForm";
 
@@ -92,6 +93,31 @@ describe("FeedbackForm", () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ feedback: "Excellent service." }),
+    });
+  });
+
+  it("submits with Enter and keeps Shift+Enter for new lines", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(jsonResponse({ sentiment: "positive", confidence: 0.81 }));
+    vi.stubGlobal("fetch", fetchMock);
+    const { feedback } = renderForm();
+    const user = userEvent.setup();
+
+    await user.type(feedback, "First line");
+    await user.keyboard("{Shift>}{Enter}{/Shift}");
+    await user.type(feedback, "Second line");
+
+    expect(feedback).toHaveValue("First line\nSecond line");
+    expect(fetchMock).not.toHaveBeenCalled();
+
+    await user.keyboard("{Enter}");
+
+    await screen.findByText("Positive");
+    expect(fetchMock).toHaveBeenCalledWith("/api/sentiment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ feedback: "First line\nSecond line" }),
     });
   });
 

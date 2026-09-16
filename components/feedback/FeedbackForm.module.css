@@ -67,8 +67,8 @@
   width: min(100%, 12.75rem);
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  margin-top: 0.9rem;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
   padding: 0.6rem 1rem;
   border: 0;
   border-radius: 0.55rem;
@@ -106,15 +106,14 @@
 }
 
 .status {
-  min-height: 1.2rem;
-  margin-top: 0.5rem;
+  min-height: 0.7rem;
+  margin-top: 0.1rem;
   color: #dbeafe;
   font-size: 0.75rem;
   text-align: center;
 }
 
 .error {
-  margin: 0.4rem 0 0;
   padding: 0.7rem 0.8rem;
   border: 1px solid rgb(252 165 165 / 48%);
   border-radius: 0.55rem;
